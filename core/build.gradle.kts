@@ -22,6 +22,9 @@ android {
 
         val showAds = localProperties.getProperty("SHOW_ADS", "false").toBoolean()
         buildConfigField("boolean", "SHOW_ADS", showAds.toString())
+
+        val admobBannerId = localProperties.getProperty("ADMOB_BANNER_ID", "")
+        buildConfigField("String", "ADMOB_BANNER_ID", "\"$admobBannerId\"")
     }
 
     buildTypes {
