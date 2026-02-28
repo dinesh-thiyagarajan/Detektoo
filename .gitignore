@@ -1,0 +1,32 @@
+*.iml
+.gradle
+/local.properties
+local.properties
+
+# IDE
+.idea/
+*.iws
+*.ipr
+
+# Build
+/build
+**/build
+/captures
+
+# Native
+.externalNativeBuild
+.cxx
+
+# macOS
+.DS_Store
+
+# Keystore
+*.jks
+*.keystore
+
+# Proguard
+**/proguard-combined.txt
+
+# Misc
+*.hprof
+*.log
