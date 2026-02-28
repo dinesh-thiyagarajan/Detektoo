@@ -30,3 +30,4 @@ local.properties
 # Misc
 *.hprof
 *.log
+/app/release/app-release.aab
