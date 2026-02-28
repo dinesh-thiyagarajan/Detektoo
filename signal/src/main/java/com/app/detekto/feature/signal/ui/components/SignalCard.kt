@@ -20,8 +20,10 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.StrokeCap
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.app.detekto.feature.signal.R
 import com.app.detekto.core.theme.SignalMedium
 import com.app.detekto.core.theme.SignalNone
 import com.app.detekto.core.theme.SignalStrong
@@ -67,13 +69,13 @@ fun SignalCard(signal: SignalInfo, modifier: Modifier = Modifier) {
                 }
                 Column(horizontalAlignment = Alignment.End) {
                     Text(
-                        text = "${signal.signalStrengthPercent}%",
+                        text = stringResource(R.string.signal_percent, signal.signalStrengthPercent),
                         style = MaterialTheme.typography.headlineSmall,
                         fontWeight = FontWeight.Bold,
                         color = progressColor
                     )
                     Text(
-                        text = "${signal.signalStrengthDbm} dBm",
+                        text = stringResource(R.string.signal_dbm, signal.signalStrengthDbm),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
@@ -92,7 +94,7 @@ fun SignalCard(signal: SignalInfo, modifier: Modifier = Modifier) {
             if (signal.isRegistered) {
                 Spacer(modifier = Modifier.height(4.dp))
                 Text(
-                    text = "Currently connected",
+                    text = stringResource(R.string.currently_connected),
                     style = MaterialTheme.typography.labelSmall,
                     color = SignalStrong
                 )

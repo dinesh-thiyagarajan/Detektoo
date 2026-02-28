@@ -32,12 +32,14 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app.detekto.core.ads.BannerAdView
+import com.app.detekto.feature.signal.R
 import com.app.detekto.feature.signal.SignalViewModel
 import com.app.detekto.feature.signal.ui.components.SignalBarChart
 import com.app.detekto.feature.signal.ui.components.SignalCard
@@ -74,12 +76,12 @@ fun SignalScreen(
             TopAppBar(
                 title = {
                     Text(
-                        text = "Detekto",
+                        text = stringResource(R.string.title_detekto),
                         fontWeight = FontWeight.Bold
                     )
                 },
                 actions = {
-                    if (!uiState.isLoading && uiState.error == null) {
+                    if (!uiState.isLoading && uiState.errorResId == null) {
                         Box(
                             modifier = Modifier
                                 .padding(end = 16.dp)
@@ -120,12 +122,12 @@ fun SignalScreen(
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         CircularProgressIndicator()
                         Spacer(modifier = Modifier.height(16.dp))
-                        Text("Scanning signals...")
+                        Text(stringResource(R.string.scanning_signals))
                     }
                 }
             }
 
-            uiState.error != null -> {
+            uiState.errorResId != null -> {
                 Box(
                     modifier = Modifier
                         .fillMaxSize()
@@ -137,7 +139,7 @@ fun SignalScreen(
                         modifier = Modifier.padding(32.dp)
                     ) {
                         Text(
-                            text = uiState.error ?: "Unknown error",
+                            text = stringResource(uiState.errorResId ?: R.string.unknown_error),
                             style = MaterialTheme.typography.bodyLarge,
                             textAlign = TextAlign.Center
                         )
@@ -150,7 +152,7 @@ fun SignalScreen(
                                 )
                             )
                         }) {
-                            Text("Grant Permission")
+                            Text(stringResource(R.string.grant_permission))
                         }
                     }
                 }
@@ -164,7 +166,7 @@ fun SignalScreen(
                     contentAlignment = Alignment.Center
                 ) {
                     Text(
-                        text = "No signals detected.\nMake sure you have a SIM card inserted.",
+                        text = stringResource(R.string.no_signals_detected),
                         style = MaterialTheme.typography.bodyLarge,
                         textAlign = TextAlign.Center
                     )
@@ -181,7 +183,7 @@ fun SignalScreen(
                 ) {
                     item {
                         Text(
-                            text = "Signal Strength Comparison",
+                            text = stringResource(R.string.signal_strength_comparison),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
                             modifier = Modifier.padding(bottom = 4.dp)
@@ -203,7 +205,7 @@ fun SignalScreen(
                     item {
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Detected Providers (${uiState.signals.size})",
+                            text = stringResource(R.string.detected_providers, uiState.signals.size),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
