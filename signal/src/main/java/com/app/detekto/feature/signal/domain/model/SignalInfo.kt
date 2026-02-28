@@ -5,5 +5,6 @@ data class SignalInfo(
     val networkType: String,
     val signalStrengthDbm: Int,
     val signalStrengthPercent: Int,
-    val isRegistered: Boolean
+    val isRegistered: Boolean,
+    val operatorCode: String = ""
 )

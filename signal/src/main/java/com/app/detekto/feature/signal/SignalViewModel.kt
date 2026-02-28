@@ -3,7 +3,9 @@ package com.app.detekto.feature.signal
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.app.detekto.feature.signal.domain.model.ProviderSignals
 import com.app.detekto.feature.signal.domain.model.SignalInfo
+import com.app.detekto.feature.signal.domain.model.groupByProvider
 import com.app.detekto.feature.signal.domain.usecase.GetSignalStrengthUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,6 +17,7 @@ import javax.inject.Inject
 
 data class SignalUiState(
     val signals: List<SignalInfo> = emptyList(),
+    val providers: List<ProviderSignals> = emptyList(),
     val isLoading: Boolean = true,
     val hasPermission: Boolean = false,
     @StringRes val errorResId: Int? = null
@@ -53,6 +56,7 @@ class SignalViewModel @Inject constructor(
                 .collect { signals ->
                     _uiState.value = _uiState.value.copy(
                         signals = signals,
+                        providers = signals.groupByProvider(),
                         isLoading = false,
                         errorResId = null
                     )

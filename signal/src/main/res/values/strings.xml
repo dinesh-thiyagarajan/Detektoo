@@ -7,6 +7,7 @@
     <string name="signal_strength_comparison">Signal Strength Comparison</string>
     <string name="detected_providers">Detected Providers (%1$d)</string>
     <string name="currently_connected">Currently connected</string>
+    <string name="active">Active</string>
     <string name="signal_percent">%1$d%%</string>
     <string name="signal_dbm">%1$d dBm</string>
     <string name="error_permission_required">Location permission is required to detect signal strength.</string>

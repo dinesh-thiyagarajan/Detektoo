@@ -12,11 +12,12 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -41,8 +42,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.app.detekto.core.ads.BannerAdView
 import com.app.detekto.feature.signal.R
 import com.app.detekto.feature.signal.SignalViewModel
+import com.app.detekto.feature.signal.ui.components.ProviderCard
 import com.app.detekto.feature.signal.ui.components.SignalBarChart
-import com.app.detekto.feature.signal.ui.components.SignalCard
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -93,7 +94,7 @@ fun SignalScreen(
                             contentAlignment = Alignment.Center
                         ) {
                             Text(
-                                text = "${uiState.signals.size}",
+                                text = "${uiState.providers.size}",
                                 style = MaterialTheme.typography.labelLarge,
                                 fontWeight = FontWeight.Bold,
                                 color = MaterialTheme.colorScheme.onPrimary
@@ -108,7 +109,11 @@ fun SignalScreen(
             )
         },
         bottomBar = {
-            BannerAdView(modifier = Modifier.fillMaxWidth())
+            BannerAdView(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .navigationBarsPadding()
+            )
         }
     ) { padding ->
         when {
@@ -205,14 +210,17 @@ fun SignalScreen(
                     item {
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = stringResource(R.string.detected_providers, uiState.signals.size),
+                            text = stringResource(R.string.detected_providers, uiState.providers.size),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold
                         )
                     }
 
-                    items(uiState.signals, key = { it.operatorName + it.networkType }) { signal ->
-                        SignalCard(signal = signal)
+                    items(
+                        uiState.providers,
+                        key = { it.operatorCode.ifEmpty { it.operatorName } }
+                    ) { provider ->
+                        ProviderCard(provider = provider)
                     }
                 }
             }
